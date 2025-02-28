@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Astha! 🎂🎉</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            color: white;
+            overflow: hidden;
+            margin: 0;
+            padding: 50px;
+        }
+        h1 {
+            font-size: 50px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        #countdown {
+            font-size: 60px;
+            font-weight: bold;
+            background: #ff5733;
+            display: inline-block;
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        p {
+            font-size: 22px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .balloons {
+            position: absolute;
+            width: 50px;
+            height: 70px;
+            background-color: #ffcc00;
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(1); opacity: 1; }
+            50% { transform: translateY(50vh) scale(1.1); opacity: 0.8; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+        }
+        .confetti {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: white;
+            opacity: 0.7;
+            border-radius: 50%;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🎂 Happy Birthday, Astha! 🎉</h1>
+    <p>Countdown to your special day!</p>
+    <div id="countdown"></div>
+
+    <script>
+        function startCountdown(targetDate) {
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const remainingTime = targetDate - now;
+
+                if (remainingTime <= 0) {
+                    document.getElementById("countdown").innerHTML = "🎈 It's Your Birthday, Astha! and we are all lucky to have you.Lets make this day even more special for you. 🎂🎉";
+                    clearInterval(timer);
+                    return;
+                }
+
+                const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((remainingTime / (1000 * 60 * 60)) % 24);
+                const minutes = Math.floor((remainingTime / (1000 * 60)) % 60);
+                const seconds = Math.floor((remainingTime / 1000) % 60);
+
+                document.getElementById("countdown").innerHTML = 
+                    `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            }
+
+            updateCountdown();
+            var timer = setInterval(updateCountdown, 1000);
+        }
+
+        const birthdayDate = new Date("March 2, 2025 00:00:00").getTime();
+        startCountdown(birthdayDate);
+
+        function createBalloon() {
+            const balloon = document.createElement("div");
+            balloon.className = "balloons";
+            document.body.appendChild(balloon);
+
+            const colors = ["#ffcc00", "#ff5733", "#33ff57", "#5733ff", "#ff33a8"];
+            balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+
+            const left = Math.random() * window.innerWidth;
+            balloon.style.left = `${left}px`;
+
+            balloon.style.animationDuration = `${Math.random() * 3 + 3}s`;
+            setTimeout(() => balloon.remove(), 6000);
+        }
+
+        setInterval(createBalloon, 500);
+
+        function createConfetti() {
+            const confetti = document.createElement("div");
+            confetti.className = "confetti";
+            document.body.appendChild(confetti);
+
+            const colors = ["#ffcc00", "#ff5733", "#33ff57", "#5733ff", "#ff33a8"];
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+
+            const left = Math.random() * window.innerWidth;
+            confetti.style.left = `${left}px`;
+
+            confetti.style.animationDuration = `${Math.random() * 3 + 2}s`;
+            setTimeout(() => confetti.remove(), 5000);
+        }
+
+        setInterval(createConfetti, 200);
+    </script>
+
+</body>
+</html>
